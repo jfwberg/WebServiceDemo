@@ -54,8 +54,28 @@ public with sharing class wsd_UserInfoGetHandler implements wsd_IWebServiceRespo
 		// Exception handling
 		try{
 
-			/* LOGIC GOES IN HERE */
-						
+			// Select basic user, profile and permission set information
+			User u = [SELECT Id, Name,UserName,Alias, Email,FederationIdentifier,IsActive,LanguageLocaleKey,LastLoginDate,LocaleSidKey,TimeZoneSidKey FROM User WHERE Id = :UserInfo.getUserId()  WITH SECURITY_ENFORCED LIMIT 1 ];
+			Profile p = [SELECT Id, Name FROM Profile WHERE Id=:UserInfo.getProfileId()  WITH SECURITY_ENFORCED LIMIT 1 ];
+			permissionSetAssignment[] ps = [SELECT PermissionSet.Id, PermissionSet.Name, PermissionSet.Label FROM permissionsetassignment WHERE AssigneeId = :UserInfo.getUserId() AND (NOT PermissionSet.Name LIKE 'X00%') WITH SECURITY_ENFORCED];
+
+			// Get user permission set names
+			Set<String> psNames = new Set<String>{};
+			for(permissionSetAssignment psa : ps){
+				psNames.add(psa.PermissionSet.Label);
+			}
+
+			// Query mappings
+			ad_mapping__c	profileMapping		= [SELECT Name__c, Ad_Group_Name__c FROM ad_mapping__c WHERE Type__c = 'Profile' AND Name__c = :p.Name LIMIT 1];
+			ad_mapping__c[] permissionSetMapping= [SELECT Name__c, Ad_Group_Name__c FROM ad_mapping__c WHERE Type__c = 'Permission Set' AND Name__c IN :psNames];
+
+			// Add data to the response
+			responseBody.data.put('userInfo', u);
+			responseBody.data.put('profileInfo:', p);
+			responseBody.data.put('adProfileInfo:', profileMapping);
+			responseBody.data.put('permissionSetInfo:', ps);
+			responseBody.data.put('adPermissionSetInfo:', permissionSetMapping);
+		
 			// Set request data so the the demo looks more fancy
 			wsd_WebServiceUtil.setRequestInfo(responseBody, req);
 			

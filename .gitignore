@@ -4,13 +4,8 @@
 
 # Salesforce cache
 .sfdx/
-.localdevserver/
-
-# LWC VSCode autocomplete
-**/lwc/jsconfig.json
-
-# LWC Jest coverage reports
-coverage/
+mdapi_output_dir/
+sfdx-out/
 
 # Logs
 logs
@@ -33,3 +28,12 @@ Thumbs.db
 ehthumbs.db
 [Dd]esktop.ini
 $RECYCLE.BIN/
+.vscode/settings.json
+.vscode/settings.json
+force-app/main/default/profiles/Admin.profile-meta.xml
+force-app/main/default/remoteSiteSettings
+force-app/main/default/authproviders
+force-app/main/default/namedCredentials
+force-app/main/default/appMenus
+.vscode/settings.json
+force-app/main/default/lwc/jsconfig.json
