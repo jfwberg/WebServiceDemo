@@ -6,7 +6,7 @@ public with sharing class wsd_UserInfoPatchHandler implements wsd_IWebServiceRes
 	public static void handleRequest(RestRequest req, RestResponse res){
 
 		// Create a web service response object
-		wsd_WebServiceResponse responseBody = new wsd_WebServiceResponse();
+		wsd_WebServiceResponse responseBody = new wsd_WebServiceResponse('userInfoUpdate');
 
 		// Step 01, validate if the request URL has the valid format
 		if(validateRequestUrl(req.requestURI)){

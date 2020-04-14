@@ -1,0 +1,16 @@
+{
+	"FederationIdentifier"	: "JvdB02",
+	"firstName" 			: "Justus",
+	"lastName"				: "van den Berg",
+	"userName"				: "JvdB02@justuscloud.com",
+	"Email"					: "JvdB02@justuscloud.com",
+	"Alias"					: "JvdB02",
+	"profileAdGroup"		: "ad_gbl_admin",
+	"permissionSetAdgroups"	: [
+		"ad_pm_sfdc_con_usr",
+		"ad_pm_surv_crt_usr"
+	]
+}
+
+/services/apexrest/UserInfo/BRID
+/services/apexrest/UserInfo/JvdB01

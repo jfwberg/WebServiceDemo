@@ -6,7 +6,7 @@ public with sharing class wsd_UserInfoGetHandler implements wsd_IWebServiceRespo
 	public static void handleRequest(RestRequest req, RestResponse res){
 
 		// Create a web service response object
-		wsd_WebServiceResponse responseBody = new wsd_WebServiceResponse();
+		wsd_WebServiceResponse responseBody = new wsd_WebServiceResponse('userInfoDetails');
 
 		// Step 01, validate if the request URL has the valid format
 		if(validateRequestUrl(req.requestURI)){
@@ -53,9 +53,12 @@ public with sharing class wsd_UserInfoGetHandler implements wsd_IWebServiceRespo
 	public static void executeLogic(wsd_WebServiceResponse responseBody, RestRequest req, RestResponse res){
 		// Exception handling
 		try{
+			
+			// Get federation identifier from the URI
+			String userFederationIdentifier = req.requestURI.substring(req.requestURI.lastIndexOf('/')+1);
 
 			// Select basic user, profile and permission set information
-			User u = [SELECT Id, Name,UserName,Alias, Email,FederationIdentifier,IsActive,LanguageLocaleKey,LastLoginDate,LocaleSidKey,TimeZoneSidKey FROM User WHERE Id = :UserInfo.getUserId()  WITH SECURITY_ENFORCED LIMIT 1 ];
+			User u = [SELECT Id, Name,UserName,Alias, Email,FederationIdentifier,IsActive,LanguageLocaleKey,LastLoginDate,LocaleSidKey,TimeZoneSidKey FROM User WHERE FederationIdentifier = :userFederationIdentifier  WITH SECURITY_ENFORCED LIMIT 1 ];
 			Profile p = [SELECT Id, Name FROM Profile WHERE Id=:UserInfo.getProfileId()  WITH SECURITY_ENFORCED LIMIT 1 ];
 			permissionSetAssignment[] ps = [SELECT PermissionSet.Id, PermissionSet.Name, PermissionSet.Label FROM permissionsetassignment WHERE AssigneeId = :UserInfo.getUserId() AND (NOT PermissionSet.Name LIKE 'X00%') WITH SECURITY_ENFORCED];
 

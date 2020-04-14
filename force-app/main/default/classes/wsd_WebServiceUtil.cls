@@ -30,4 +30,16 @@ public with sharing class wsd_WebServiceUtil {
 		requestInfo.put('remoteAddress',req.remoteAddress);
 		responseBody.data.put('requestInfo', requestInfo);
 	}
+
+	// Very bad method, not bulkyfied, DEMO ONLY never implement this way
+	public static String getProfileIdBasedOnAdName(String adName){
+		ad_mapping__c profileMapping	= [SELECT Name__c, Ad_Group_Name__c FROM ad_mapping__c WHERE Type__c = 'Profile' AND Ad_Group_Name__c = :adName LIMIT 1];
+		return [SELECT Id FROM Profile WHERE Name = :profileMapping.Name__c LIMIT 1].Id;
+	}
+
+	// Even worse method, not bulkyfied, DEMO ONLY never implement this way
+	public static String getPermissionSetIdBasedOnAdName(String adName){
+		ad_mapping__c permissionSetMapping= [SELECT Name__c, Ad_Group_Name__c FROM ad_mapping__c WHERE Type__c = 'Permission Set' AND Ad_Group_Name__c = :adName LIMIT 1];
+		return [SELECT Id FROM PermissionSet WHERE Label = :permissionSetMapping.Name__c LIMIT 1].Id;
+	}
 }

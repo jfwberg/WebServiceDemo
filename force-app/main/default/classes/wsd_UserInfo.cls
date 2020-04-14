@@ -28,7 +28,7 @@ global with sharing class wsd_UserInfo {
 		setupResponse(RestContext.response);
 
 		// Handle response logic
-		wsd_UserInfoGetHandler.handleRequest(RestContext.request, RestContext.response);
+		wsd_UserInfoPostHandler.handleRequest(RestContext.request, RestContext.response);
 
 		// Save log to the database
 		saveLog(RestContext.request, RestContext.response);
@@ -61,7 +61,7 @@ global with sharing class wsd_UserInfo {
 		if(res == null){res = new RestResponse();}
 
 		// Create a web service response object
-		wsd_WebServiceResponse responseBody = new wsd_WebServiceResponse();
+		wsd_WebServiceResponse responseBody = new wsd_WebServiceResponse('error');
 		wsd_WebServiceUtil.setError(responseBody, res, wsd_WebServiceUtil.ERR_MSG_INT_SVR_ERR, 500);
 
 		// Set the response body
