@@ -8,7 +8,9 @@
 	"profileAdGroup"		: "ad_gbl_admin",
 	"permissionSetAdgroups"	: [
 		"ad_pm_sfdc_con_usr",
-		"ad_pm_surv_crt_usr"
+		"ad_pm_surv_crt_usr",
+		"ad_pm_awb_user",
+		"ad_pm_add_user"
 	]
 }
 
