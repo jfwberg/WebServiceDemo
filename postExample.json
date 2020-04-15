@@ -1,10 +1,10 @@
 {
-	"FederationIdentifier"	: "JvdB02",
-	"firstName" 			: "Justus",
-	"lastName"				: "van den Berg",
-	"userName"				: "JvdB02@justuscloud.com",
-	"Email"					: "JvdB02@justuscloud.com",
-	"Alias"					: "JvdB02",
+	"FederationIdentifier"	: "TST0001",
+	"firstName" 			: "Megan",
+	"lastName"				: "Monroe",
+	"userName"				: "megan@example.com",
+	"Email"					: "megan@example.com",
+	"Alias"					: "MeganM",
 	"profileAdGroup"		: "ad_gbl_admin",
 	"permissionSetAdgroups"	: [
 		"ad_pm_sfdc_con_usr",
